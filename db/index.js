@@ -5,10 +5,9 @@ class employeeTDB {
         this.connection = connection;
     }
 
-    allEmployees() {
-        return this.connection.promise().query(
-            
-        )
+    // Show departments
+    allDepartments() {
+        return this.connection.promise().query("SELECT department.id, department.name FROM department;");
     }
 }
 

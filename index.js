@@ -36,8 +36,12 @@ const choices = [
         name: "Update an employee role",
         value: "update_an_employee_role",
       },
-    ],
-  },
+      {
+        name: 'Exit',
+        value: "exit"
+      }
+    ]
+  }
 ];
 
 // Initialize app tracker
@@ -48,33 +52,28 @@ function init() {
       let options = res.options;
 
       // Conditions depending on the user selection
-      console.log(`
-    ============
-    Options List
-    ============`);
-
       switch (options) {
         case "view_all_departments":
           viewAllDepartments();
           break;
-        case "view_all_roles":
-          viewAllRoles();
-          break;
-        case "view_all_employees":
-          viewAllEmployees();
-          break;
-        case "add_a_department":
-          addADepartment();
-          break;
-        case "add_a_role":
-          addARole();
-          break;
-        case "add_an_employee":
-          addAnEmployee();
-          break;
-        case "update_an_employee_role":
-          updateAnEmployeeRole();
-          break;
+        // case "view_all_roles":
+        //   viewAllRoles();
+        //   break;
+        // case "view_all_employees":
+        //   viewAllEmployees();
+        //   break;
+        // case "add_a_department":
+        //   addADepartment();
+        //   break;
+        // case "add_a_role":
+        //   addARole();
+        //   break;
+        // case "add_an_employee":
+        //   addAnEmployee();
+        //   break;
+        // case "update_an_employee_role":
+        //   updateAnEmployeeRole();
+        //   break;
         default:
           exitTracker();
       }
@@ -82,6 +81,14 @@ function init() {
     .catch((err) => {
       console.log(err);
     });
+}
+
+function viewAllDepartments() {
+  db.allDepartments().then(([rows]) => {
+    let departments = rows;
+    console.log('\n');
+    console.table(departments);
+  }).then(() => init());
 }
 
 function exitTracker() {
