@@ -21,6 +21,13 @@ class employeeTrackerDB {
       .query("INSERT INTO department SET ?", department);
   }
 
+  // Delete department
+  removeDepartment(department) {
+    return this.connection
+      .promise()
+      .query("DELETE FROM department WHERE id = ?", department);
+  }
+
   //* ROLE SECTION //
 
   // Show roles

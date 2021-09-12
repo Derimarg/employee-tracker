@@ -40,6 +40,10 @@ const choices = [
         value: "update_an_employee_role",
       },
       {
+        name: "Remove a department",
+        value: "remove_a_department",
+      },
+      {
         name: "Exit",
         value: "exit",
       },
@@ -47,20 +51,21 @@ const choices = [
   },
 ];
 
-// Initialize app tracker
+// Message start application
 function messageStart() {
   clear();
-  
+
   console.log(
     chalk.yellow(
       figlet.textSync("Employee Manager", {
         horizontalLayout: "default",
         width: 50,
-        kerning: "full"
+        kerning: "full",
       })
     )
   );
 
+  // Initialize app tracker
   function init() {
     inquirer
       .prompt(choices)
@@ -74,6 +79,9 @@ function messageStart() {
             break;
           case "add_a_department":
             addADepartment();
+            break;
+          case "remove_a_department":
+            removeADepartment();
             break;
           case "view_all_roles":
             viewAllRoles();
@@ -123,9 +131,9 @@ function messageStart() {
         db.addDepartment(name)
           .then(() =>
             console.log(`
-  ==========================================
-  ${name.name} department added to database!
-  ==========================================`)
+==========================================
+${name.name} department added to database!
+==========================================`)
           )
           .then(() => console.log("\n"))
           .then(() => init());
@@ -133,6 +141,42 @@ function messageStart() {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  function removeADepartment() {
+    db.allDepartments().then(([rows]) => {
+      let departments = rows;
+      const departmentOptions = departments.map(({ id, name }) => ({
+        name: name,
+        value: id,
+      }));
+
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "department",
+            message: "Select department to remove!",
+            choices: departmentOptions,
+          },
+        ])
+        .then((res) => {
+          let department = res.department;
+
+          db.removeDepartment(department)
+            .then(() =>
+              console.log(`
+================================
+Department removed successfully!
+================================`)
+            )
+            .then(() => console.log("\n"))
+            .then(() => init());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
   }
 
   // ROLE SECTION
@@ -175,9 +219,9 @@ function messageStart() {
           db.addRole(role)
             .then(() =>
               console.log(`
-  ==========================================
-  ${role.title} role added to database!
-  ==========================================`)
+==========================================
+${role.title} role added to database!
+==========================================`)
             )
             .then(() => console.log("\n"))
             .then(() => init());
@@ -263,9 +307,9 @@ function messageStart() {
                     })
                     .then(() =>
                       console.log(`
-  =====================================================
-  ${firstName} ${lastName}, employee added to database!
-  =====================================================`)
+=====================================================
+${firstName} ${lastName}, employee added to database!
+=====================================================`)
                     )
                     .then(() => console.log("\n"))
                     .then(() => init());
@@ -318,9 +362,9 @@ function messageStart() {
               .then((res) => db.updateEmployeeRole(employeeId, res.roleId))
               .then(() =>
                 console.log(`
-  ==================================
-  Employee role updated at database!
-  ==================================`)
+==================================
+Employee role updated at database!
+==================================`)
               )
               .then(() => console.log("\n"))
               .then(() => init())
