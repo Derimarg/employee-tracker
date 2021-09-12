@@ -59,9 +59,9 @@ function init() {
         case "view_all_roles":
           viewAllRoles();
           break;
-        // case "view_all_employees":
-        //   viewAllEmployees();
-        //   break;
+        case "view_all_employees":
+          viewAllEmployees();
+          break;
         // case "add_a_department":
         //   addADepartment();
         //   break;
@@ -97,6 +97,16 @@ function viewAllRoles() {
     console.log('\n');
     console.table(roles);
   }).then(() => init());
+}
+
+function viewAllEmployees() {
+    db.allEmployees()
+        .then(([rows]) => {
+            let employees = rows;
+            console.log("\n");
+            console.table(employees);
+        })
+        .then(() => init());
 }
 
 function exitTracker() {

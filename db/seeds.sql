@@ -19,3 +19,14 @@ VALUES
     ('IT MGR', 85000, 5),
     ('HR MGR', 70000, 6),
     ('Administration MGR', 95000, 7);
+
+INSERT INTO employee
+    (first_name, last_name, role_id, manager_id)
+VALUES 
+    ('Charles', 'Brown', 1, NULL),
+    ('Eliza', 'Parsons', 2, 1),
+    ('Susan', 'Hill', 3, NULL),
+    ('Sydney', 'Owenson', 4, 3),
+    ('Hubert', 'Crackanthorpe', 5, NULL),
+    ('William', 'Carleton', 6, 5),
+    ('Gerald', 'Griffin', 7, NULL);
