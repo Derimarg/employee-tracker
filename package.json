@@ -4,7 +4,10 @@
   "description": "Employee tracker",
   "main": "index.js",
   "dependencies": {
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0",
     "console.table": "^0.10.0",
+    "figlet": "^1.5.2",
     "inquirer": "^8.1.2",
     "mysql2": "^2.3.0"
   },
