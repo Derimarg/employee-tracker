@@ -71,9 +71,9 @@ function init() {
         case "add_an_employee":
           addAnEmployee();
           break;
-        // case "update_an_employee_role":
-        //   updateAnEmployeeRole();
-        //   break;
+        case "update_an_employee_role":
+          updateAnEmployeeRole();
+          break;
         default:
           exitTracker();
       }
@@ -83,6 +83,7 @@ function init() {
     });
 }
 
+// DEPARTMENT SECTION
 function viewAllDepartments() {
   db.allDepartments()
     .then(([rows]) => {
@@ -118,6 +119,7 @@ ${name.name} department added to database!
     });
 }
 
+// ROLE SECTION
 function viewAllRoles() {
   db.allRoles()
     .then(([rows]) => {
@@ -170,6 +172,7 @@ ${role.title} role added to database!
   });
 }
 
+// EMPLOYEE SECTION
 function viewAllEmployees() {
   db.allEmployees()
     .then(([rows]) => {
@@ -257,6 +260,58 @@ ${firstName} ${lastName}, employee added to database!
           });
       });
     });
+}
+
+function updateAnEmployeeRole() {
+  db.allEmployees().then(([rows]) => {
+    let employees = rows;
+    const employeeOptions = employees.map(({ id, first_name, last_name }) => ({
+      name: `${first_name} ${last_name}`,
+      value: id,
+    }));
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "employeeId",
+          message: "Provide employee's role to update!",
+          choices: employeeOptions,
+        },
+      ])
+      .then((res) => {
+        let employeeId = res.employeeId;
+
+        db.allRoles().then(([rows]) => {
+          let roles = rows;
+          const roleOptions = roles.map(({ id, title }) => ({
+            name: title,
+            value: id,
+          }));
+
+          inquirer
+            .prompt([
+              {
+                type: "list",
+                name: "roleId",
+                message: "Provide new role of employee!",
+                choices: roleOptions,
+              },
+            ])
+            .then((res) => db.updateEmployeeRole(employeeId, res.roleId))
+            .then(() =>
+              console.log(`
+==================================
+Employee role updated at database!
+==================================`)
+            )
+            .then(() => console.log("\n"))
+            .then(() => init())
+            .catch((err) => {
+              console.log(err);
+            });
+        });
+      });
+  });
 }
 
 function exitTracker() {
