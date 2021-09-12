@@ -56,6 +56,10 @@ const choices = [
         value: "view_department_budgets",
       },
       {
+        name: "View employee by department",
+        value: "view_employee_by_department",
+      },
+      {
         name: "Exit",
         value: "exit",
       },
@@ -112,6 +116,9 @@ function messageStart() {
             break;
           case "update_an_employee_role":
             updateAnEmployeeRole();
+            break;
+          case "view_employee_by_department":
+            viewEmployeeByDepartment();
             break;
           case "remove_a_employee":
             removeAEmployee();
@@ -431,6 +438,19 @@ Employee role updated at database!
           });
         });
     });
+  }
+
+  function viewEmployeeByDepartment() {
+    db.viewEmployeeDepartment()
+      .then(([rows]) => {
+        let employee = rows;
+        console.log("\n");
+        console.table(employee);
+      })
+      .then(() => init())
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function removeAEmployee() {

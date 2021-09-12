@@ -79,6 +79,14 @@ class employeeTrackerDB {
       ]);
   }
 
+  // View employee by department
+  viewEmployeeDepartment() {
+    return this.connection
+      .promise()
+      .query(
+        "SELECT employee.first_name, employee.last_name, department.name AS department FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id"
+      );
+  }
   // Delete employee
   removeEmployee(employee) {
     return this.connection
