@@ -78,6 +78,13 @@ class employeeTrackerDB {
         employeeId,
       ]);
   }
+
+  // Delete employee
+  removeEmployee(employee) {
+    return this.connection
+      .promise()
+      .query("DELETE FROM employee WHERE id = ?", employee);
+  }
 }
 
 module.exports = new employeeTrackerDB(connection);

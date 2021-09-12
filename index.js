@@ -48,6 +48,10 @@ const choices = [
         value: "remove_a_role",
       },
       {
+        name: "Remove a employee",
+        value: "remove_a_employee",
+      },
+      {
         name: "Exit",
         value: "exit",
       },
@@ -104,6 +108,9 @@ function messageStart() {
             break;
           case "update_an_employee_role":
             updateAnEmployeeRole();
+            break;
+          case "remove_a_employee":
+            removeAEmployee();
             break;
           default:
             exitTracker();
@@ -226,9 +233,9 @@ Department removed successfully!
           db.addRole(role)
             .then(() =>
               console.log(`
-==========================================
+=====================================
 ${role.title} role added to database!
-==========================================`)
+=====================================`)
             )
             .then(() => console.log("\n"))
             .then(() => init());
@@ -415,6 +422,44 @@ Employee role updated at database!
                 console.log(err);
               });
           });
+        });
+    });
+  }
+
+  function removeAEmployee() {
+    db.allEmployees().then(([rows]) => {
+      let employees = rows;
+      const employeeOptions = employees.map(
+        ({ id, first_name, last_name }) => ({
+          name: first_name + " " + last_name,
+          value: id,
+        })
+      );
+
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "employee",
+            message: "Select employee to remove!",
+            choices: employeeOptions,
+          },
+        ])
+        .then((res) => {
+          let employee = res.employee;
+
+          db.removeEmployee(employee)
+            .then(() =>
+              console.log(`
+==============================
+Employee removed successfully!
+==============================`)
+            )
+            .then(() => console.log("\n"))
+            .then(() => init());
+        })
+        .catch((err) => {
+          console.log(err);
         });
     });
   }
