@@ -62,12 +62,13 @@ function init() {
         case "view_all_roles":
           viewAllRoles();
           break;
+        case "add_a_role":
+          addARole();
+          break;
         case "view_all_employees":
           viewAllEmployees();
           break;
-        // case "add_a_role":
-        //   addARole();
-        //   break;
+
         // case "add_an_employee":
         //   addAnEmployee();
         //   break;
@@ -100,14 +101,15 @@ function addADepartment() {
         name: "name",
         message: "Provide department name!",
       },
-    ])
-    .then((res) => {
+    ]).then((res) => {
       let name = res;
       db.addDepartment(name)
-        .then(() => console.log(`
+        .then(() =>
+          console.log(`
 ==========================================
 ${name.name} department added to database!
-==========================================`))
+==========================================`)
+        )
         .then(() => console.log("\n"))
         .then(() => init());
     })
@@ -124,6 +126,46 @@ function viewAllRoles() {
       console.table(roles);
     })
     .then(() => init());
+}
+
+function addARole() {
+  db.allDepartments().then(([rows]) => {
+    let departments = rows;
+    const departmentOptions = departments.map(({ id, name }) => ({
+      name: name,
+      value: id,
+    }));
+
+    inquirer.prompt([
+      {
+        name: "title",
+        message: "Provide name of the role!",
+      },
+      {
+        name: "salary",
+        message: "Provide salary rate!",
+      },
+      {
+        type: "list",
+        name: "department_id",
+        message: "Provide department of role!",
+        choices: departmentOptions,
+      },
+    ]).then(role => {
+      db.addRole(role)
+        .then(() =>
+          console.log(`
+==========================================
+${role.title} role added to database!
+==========================================`)
+        )
+        .then(() => console.log("\n"))
+        .then(() => init());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  })
 }
 
 function viewAllEmployees() {

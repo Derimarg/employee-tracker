@@ -5,6 +5,10 @@ class employeeTrackerDB {
         this.connection = connection;
     }
 
+    /*================
+    Department Section 
+    ================*/
+
     // Show departments
     allDepartments() {
         return this.connection.promise().query("SELECT department.id, department.name FROM department;");
@@ -15,9 +19,19 @@ class employeeTrackerDB {
         return this.connection.promise().query("INSERT INTO department SET ?", department);
     }
 
+    
+    /*================
+    Role Section 
+    ================*/
+
     // Show roles
     allRoles() {
         return this.connection.promise().query("SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;");
+    }
+    
+    // Add role
+    addRole(role) {
+        return this.connection.promise().query('INSERT INTO role SET ?', role);
     }
 
     // Show employees
