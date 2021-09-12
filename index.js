@@ -44,6 +44,10 @@ const choices = [
         value: "remove_a_department",
       },
       {
+        name: "Remove a role",
+        value: "remove_a_role",
+      },
+      {
         name: "Exit",
         value: "exit",
       },
@@ -88,6 +92,9 @@ function messageStart() {
             break;
           case "add_a_role":
             addARole();
+            break;
+          case "remove_a_role":
+            removeARole();
             break;
           case "view_all_employees":
             viewAllEmployees();
@@ -222,6 +229,42 @@ Department removed successfully!
 ==========================================
 ${role.title} role added to database!
 ==========================================`)
+            )
+            .then(() => console.log("\n"))
+            .then(() => init());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    });
+  }
+
+  function removeARole() {
+    db.allRoles().then(([rows]) => {
+      let roles = rows;
+      const roleOptions = roles.map(({ id, title }) => ({
+        name: title,
+        value: id,
+      }));
+
+      inquirer
+        .prompt([
+          {
+            type: "list",
+            name: "role",
+            message: "Select role to remove!",
+            choices: roleOptions,
+          },
+        ])
+        .then((res) => {
+          let role = res.role;
+
+          db.removeRole(role)
+            .then(() =>
+              console.log(`
+==========================
+Role removed successfully!
+==========================`)
             )
             .then(() => console.log("\n"))
             .then(() => init());

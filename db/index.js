@@ -44,6 +44,13 @@ class employeeTrackerDB {
     return this.connection.promise().query("INSERT INTO role SET ?", role);
   }
 
+  // Delete role
+  removeRole(role) {
+    return this.connection
+      .promise()
+      .query("DELETE FROM role WHERE id = ?", role);
+  }
+
   //* EMPLOYEE SECTION //
 
   // Show employees
