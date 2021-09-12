@@ -37,11 +37,11 @@ const choices = [
         value: "update_an_employee_role",
       },
       {
-        name: 'Exit',
-        value: "exit"
-      }
-    ]
-  }
+        name: "Exit",
+        value: "exit",
+      },
+    ],
+  },
 ];
 
 // Initialize app tracker
@@ -56,15 +56,15 @@ function init() {
         case "view_all_departments":
           viewAllDepartments();
           break;
+        case "add_a_department":
+          addADepartment();
+          break;
         case "view_all_roles":
           viewAllRoles();
           break;
         case "view_all_employees":
           viewAllEmployees();
           break;
-        // case "add_a_department":
-        //   addADepartment();
-        //   break;
         // case "add_a_role":
         //   addARole();
         //   break;
@@ -84,29 +84,56 @@ function init() {
 }
 
 function viewAllDepartments() {
-  db.allDepartments().then(([rows]) => {
-    let departments = rows;
-    console.log('\n');
-    console.table(departments);
-  }).then(() => init());
+  db.allDepartments()
+    .then(([rows]) => {
+      let departments = rows;
+      console.log("\n");
+      console.table(departments);
+    })
+    .then(() => init());
+}
+
+function addADepartment() {
+  inquirer
+    .prompt([
+      {
+        name: "name",
+        message: "Provide department name!",
+      },
+    ])
+    .then((res) => {
+      let name = res;
+      db.addDepartment(name)
+        .then(() => console.log(`
+==========================================
+${name.name} department added to database!
+==========================================`))
+        .then(() => console.log("\n"))
+        .then(() => init());
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function viewAllRoles() {
-  db.allRoles().then(([rows]) => {
-    let roles = rows;
-    console.log('\n');
-    console.table(roles);
-  }).then(() => init());
+  db.allRoles()
+    .then(([rows]) => {
+      let roles = rows;
+      console.log("\n");
+      console.table(roles);
+    })
+    .then(() => init());
 }
 
 function viewAllEmployees() {
-    db.allEmployees()
-        .then(([rows]) => {
-            let employees = rows;
-            console.log("\n");
-            console.table(employees);
-        })
-        .then(() => init());
+  db.allEmployees()
+    .then(([rows]) => {
+      let employees = rows;
+      console.log("\n");
+      console.table(employees);
+    })
+    .then(() => init());
 }
 
 function exitTracker() {
