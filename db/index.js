@@ -1,6 +1,6 @@
 const connection = require('./connection');
 
-class employeeTDB {
+class employeeTrackerDB {
     constructor(connection) {
         this.connection = connection;
     }
@@ -9,6 +9,11 @@ class employeeTDB {
     allDepartments() {
         return this.connection.promise().query("SELECT department.id, department.name FROM department;");
     }
+
+    // Show roles
+    allRoles() {
+        return this.connection.promise().query("SELECT role.id, role.title, department.name AS department, role.salary FROM role LEFT JOIN department ON role.department_id = department.id;");
+    }
 }
 
-module.exports = new employeeTDB(connection);
+module.exports = new employeeTrackerDB(connection);

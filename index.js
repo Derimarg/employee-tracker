@@ -56,9 +56,9 @@ function init() {
         case "view_all_departments":
           viewAllDepartments();
           break;
-        // case "view_all_roles":
-        //   viewAllRoles();
-        //   break;
+        case "view_all_roles":
+          viewAllRoles();
+          break;
         // case "view_all_employees":
         //   viewAllEmployees();
         //   break;
@@ -88,6 +88,14 @@ function viewAllDepartments() {
     let departments = rows;
     console.log('\n');
     console.table(departments);
+  }).then(() => init());
+}
+
+function viewAllRoles() {
+  db.allRoles().then(([rows]) => {
+    let roles = rows;
+    console.log('\n');
+    console.table(roles);
   }).then(() => init());
 }
 
