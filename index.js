@@ -52,6 +52,10 @@ const choices = [
         value: "remove_a_employee",
       },
       {
+        name: "View department budgets",
+        value: "view_department_budgets",
+      },
+      {
         name: "Exit",
         value: "exit",
       },
@@ -111,6 +115,9 @@ function messageStart() {
             break;
           case "remove_a_employee":
             removeAEmployee();
+            break;
+          case "view_department_budgets":
+            viewDepartmentBudgets();
             break;
           default:
             exitTracker();
@@ -462,6 +469,22 @@ Employee removed successfully!
           console.log(err);
         });
     });
+  }
+
+  function viewDepartmentBudgets() {
+    db.viewBudget()
+      .then(([rows]) => {
+        let budgets = rows;
+        console.log(`\n 
+=====================================
+        BUDGET BY DEPARTMENT
+===================================== \n`);
+        console.table(budgets);
+      })
+      .then(() => init())
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function exitTracker() {
