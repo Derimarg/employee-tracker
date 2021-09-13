@@ -107,6 +107,12 @@ These is a simple employee tracker, the purpose is to be able to view and manage
 - Choosing to view budget, will display the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
 <br />
 <br />
+  Design of **database schema** as shown in the following image:
+<br />
+<br />
+<img src="./assets/images/db_diagram.png" alt="Database schema" width="700" height="700">
+<br />
+<br />
 
 [Back To Top](#employee-tracker)
 
