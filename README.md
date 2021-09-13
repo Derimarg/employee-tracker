@@ -22,7 +22,7 @@ As a business owner I want to be able to view and manage the departments, roles,
 <a href="#description"><strong>Explore the docs »</strong></a>
 <br />
 <br />
-<a href="#example">View Demo</a>
+<a href="https://drive.google.com/file/d/1Ez7ilL_wZZJEsHCGCL71YXDTUqC4ABBE/view?usp=sharing">View Demo</a>
 .
 <a href="https://github.com/Derimarg/employee-tracker/issues">Report Bug</a>
 ·
@@ -42,11 +42,9 @@ As a business owner I want to be able to view and manage the departments, roles,
 <li><a href="#how-to-download">Download</a></li>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#prerequisites">Prerequisites</a></li>
-<li><a href="#test">Test</a></li>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#roadmap">Roadmap</a></li>
 <li><a href="#contributing">Contributing</a></li>
-
 <li><a href="#questions">Questions</a></li>
 <li><a href="#license">License</a></li>
 </ul>
@@ -61,13 +59,18 @@ These is a simple employee tracker, the purpose is to be able to view and manage
 
 - This application will work with command-line that accepts user input.
 - Starting the application, will be presented the following options: 
-  - view all departments
-  - view all roles
+  - View all departments
+  - View all roles
   - view all employees
-  - add a department 
-  - add a role
-  - add an employee
-  - update an employee role
+  - Add a department 
+  - Add a role
+  - Add an employee
+  - Update an employee role
+  - Remove a department
+  - Remove a role
+  - Remove an employee
+  - View department budgets
+  - View employee by department
 
 - Choosing to view all departments, will be presented a formatted table showing:
   - department names
@@ -101,6 +104,7 @@ These is a simple employee tracker, the purpose is to be able to view and manage
   - manager and that employee is added to the database.
 
 - Choosing to update an employee role, will be prompted to select an employee to update and their new role and this information is updated in the database.
+- Choosing to view budget, will display the total utilized budget of a department—in other words, the combined salaries of all employees in that department.
 <br />
 <br />
 
@@ -108,18 +112,34 @@ These is a simple employee tracker, the purpose is to be able to view and manage
 
 ---
 
-### Example:
+### Examples:
+<br />
   
-  ![Demo](./assets/images/demo.gif)
+  ![Demo-01](./assets/images/demo-01.png)
+
+  <br />
+
+  ![Demo-02](./assets/images/demo-02.png)
+
+  <br />
+
+  ![Demo-03](./assets/images/demo-03.png)
+
+  <br />
+
+  ![Demo-04](./assets/images/demo-04.png)
 
 ## Technologies
 
 - <p><a href="https://nodejs.org/">Node.js</a></p>
-- <p><a href="https://www.npmjs.com/">NPM</a></p>
 - <p><a href="https://dev.mysql.com">MySQL</a></p>
+- <p><a href="https://www.npmjs.com/">NPM</a></p>
+- <p><a href="https://www.npmjs.com/package/console.table">NPM console.table</a></p>
 - <p><a href="https://www.npmjs.com/package/inquirer">NPM Inquirer.js</a></p>
 - <p><a href="https://www.npmjs.com/package/mysql2">NPM Node MySQL 2</a></p>
-- <p><a href="https://www.npmjs.com/package/console.table">NPM console.table</a></p>
+- <p><a href="https://www.npmjs.com/package/figlet">NPM figlet</a></p>
+- <p><a href="https://www.npmjs.com/package/clear">NPM clear</a></p>
+- <p><a href="https://www.npmjs.com/package/chalk">NPM chalk</a></p>
 
 [Back To Top](#employee-tracker)
 
@@ -164,7 +184,7 @@ Before of using this application, is require to install dependencies, run the fo
 
   ## Usage
 
-  open source application
+  This is a open source program, feel free to use it, contact me to request features.
     
 
 <!-- ROADMAP -->
@@ -196,6 +216,7 @@ For additional help or questions about collaboration, contact me at: derimargray
 - GitHub - [Derimarg](https://github.com/Derimarg/)
 - Linkedin - [Derimar Gray](https://www.linkedin.com/in/derimar-gray-676275132/)
 - Project Repository Link: https://github.com/Derimarg/employee-tracker
+- walkthrough video: https://drive.google.com/file/d/1Ez7ilL_wZZJEsHCGCL71YXDTUqC4ABBE/view?usp=sharing
 
 [Back To Top](#employee-tracker)
 

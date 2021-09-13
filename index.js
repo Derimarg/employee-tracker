@@ -48,8 +48,8 @@ const choices = [
         value: "remove_a_role",
       },
       {
-        name: "Remove a employee",
-        value: "remove_a_employee",
+        name: "Remove an employee",
+        value: "remove_an_employee",
       },
       {
         name: "View department budgets",
@@ -120,7 +120,7 @@ function messageStart() {
           case "view_employee_by_department":
             viewEmployeeByDepartment();
             break;
-          case "remove_a_employee":
+          case "remove_an_employee":
             removeAEmployee();
             break;
           case "view_department_budgets":
